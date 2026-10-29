@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Tanishka Rathore, a BBA student interested in business, management, and digital skills.">
+  <title>Tanishka Rathore | BBA Student Portfolio</title>
+  <style>
+    :root {
+      --bg: #fbf8f4;
+      --surface: #ffffff;
+      --ink: #24232b;
+      --muted: #6d6a78;
+      --accent: #7457d9;
+      --accent-dark: #5a3dc0;
+      --accent-soft: #eee9ff;
+      --line: #e9e4ef;
+      --shadow: 0 18px 45px rgba(43, 31, 81, .09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg); color: var(--ink); line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(1120px, 90%); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 100; background: rgba(251,248,244,.92);
+      backdrop-filter: blur(14px); border-bottom: 1px solid rgba(233,228,239,.8);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 850; letter-spacing: -.7px; font-size: 1.12rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 27px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .94rem; font-weight: 650; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 8px 11px; cursor: pointer; }
+    .hero { padding: 92px 0 86px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent-dark); background: var(--accent-soft); padding: 7px 13px; border-radius: 999px; font-size: .82rem; font-weight: 750; margin-bottom: 22px; }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    h1 { font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1.05; letter-spacing: -3px; margin-bottom: 22px; }
+    h1 span { color: var(--accent); }
+    .hero-copy { max-width: 590px; color: var(--muted); font-size: 1.08rem; margin-bottom: 29px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 13px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 19px; border-radius: 12px; border: 1px solid transparent; font-weight: 750; cursor: pointer; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: white; box-shadow: 0 9px 22px rgba(116,87,217,.22); }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-secondary { background: white; border-color: var(--line); }
+    .hero-art { min-height: 390px; display: grid; place-items: center; position: relative; }
+    .portrait-card { position: relative; width: min(320px, 90%); aspect-ratio: 4 / 4.5; border-radius: 160px 160px 34px 34px; background: linear-gradient(145deg, #ded4ff, #f5dce7 58%, #f8e9d7); box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .portrait-card::before { content: ""; position: absolute; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; top: 42px; }
+    .initials { position: relative; display: grid; place-items: center; width: 175px; height: 175px; border-radius: 50%; background: rgba(255,255,255,.7); color: var(--accent-dark); font-size: 4rem; font-weight: 850; letter-spacing: -4px; border: 7px solid rgba(255,255,255,.48); }
+    .floating-note { position: absolute; background: white; border: 1px solid var(--line); padding: 12px 15px; border-radius: 15px; box-shadow: var(--shadow); font-size: .88rem; font-weight: 750; }
+    .note-one { top: 58px; left: -8px; transform: rotate(-5deg); }
+    .note-two { bottom: 44px; right: -14px; transform: rotate(4deg); }
+    section { padding: 82px 0; }
+    .section-heading { max-width: 650px; margin-bottom: 36px; }
+    .section-kicker { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; font-weight: 850; margin-bottom: 8px; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -1.4px; line-height: 1.15; margin-bottom: 13px; }
+    .section-heading p, .muted { color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; }
+    .about-highlight, .panel, .skill-card, .project-card, .contact-card, .timeline-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 25px rgba(43,31,81,.035);
+    }
+    .about-highlight { padding: 30px; background: var(--accent-soft); border-color: transparent; }
+    .about-highlight .big-number { font-size: 3rem; font-weight: 900; color: var(--accent-dark); line-height: 1; margin: 10px 0 14px; }
+    .panel { padding: 30px; }
+    .panel p + p { margin-top: 14px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .skill-card { padding: 23px; transition: transform .2s, box-shadow .2s; }
+    .skill-card:hover, .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .skill-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-dark); font-size: 1.35rem; margin-bottom: 17px; }
+    h3 { font-size: 1.12rem; margin-bottom: 7px; }
+    .skill-card p, .project-card p { color: var(--muted); font-size: .94rem; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { padding: 25px; transition: transform .2s, box-shadow .2s; }
+    .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    .project-symbol { width: 49px; height: 49px; border-radius: 15px; background: #f4efff; display: grid; place-items: center; color: var(--accent); font-size: 1.35rem; }
+    .project-type { color: var(--muted); font-size: .78rem; font-weight: 700; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .tag { padding: 5px 9px; border-radius: 8px; background: #f6f3fb; color: #625778; font-size: .75rem; font-weight: 700; }
+    .education-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .timeline-card { padding: 25px; display: flex; gap: 17px; }
+    .timeline-dot { width: 12px; height: 12px; flex: 0 0 12px; margin-top: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--accent-soft); }
+    .timeline-card .meta { color: var(--accent); font-size: .8rem; font-weight: 800; margin-bottom: 5px; }
+    .contact-section { background: #f1edfb; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: start; }
+    .contact-card { padding: 28px; }
+    .contact-detail { display: flex; gap: 13px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .contact-detail:last-child { border-bottom: 0; }
+    .contact-detail .mini-icon { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-dark); }
+    .contact-detail small { display: block; color: var(--muted); }
+    .contact-detail strong { overflow-wrap: anywhere; }
+    form { display: grid; gap: 14px; }
+    label { display: block; font-size: .87rem; font-weight: 750; margin-bottom: 6px; }
+    input, textarea { width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 11px; padding: 12px 13px; outline: none; transition: border .2s, box-shadow .2s; }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(116,87,217,.12); }
+    textarea { min-height: 125px; resize: vertical; }
+    .form-message { color: var(--accent-dark); font-size: .88rem; min-height: 1.3em; }
+    footer { padding: 25px 0; background: #24232b; color: #d9d5e4; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; font-size: .88rem; }
+    .back-top { color: white; font-weight: 750; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero { padding-top: 65px; }
+      .hero-art { min-height: 350px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid, .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 15px; }
+    }
+    @media (max-width: 620px) {
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 5%; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 10px 0; }
+      h1 { letter-spacing: -1.8px; }
+      section { padding: 62px 0; }
+      .skills-grid, .project-grid, .education-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 315px; }
+      .portrait-card { width: 250px; }
+      .note-one { left: 0; }
+      .note-two { right: 0; }
+      .panel, .about-highlight, .contact-card { padding: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home">Tanishka<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">BBA Student · Future Business Professional</div>
+          <h1>Hello, I'm<br><span>Tanishka Rathore.</span></h1>
+          <p class="hero-copy">I’m a Bachelor of Business Administration student building my understanding of management, marketing, teamwork, and the digital tools that help businesses grow.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="#projects">Explore My Work <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-art reveal" aria-label="Decorative initials illustration">
+          <div class="portrait-card">
+            <div class="initials" aria-label="Tanishka Rathore initials">TR</div>
+          </div>
+          <div class="floating-note note-one">✦ Curious mind</div>
+          <div class="floating-note note-two">📊 Business & ideas</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">A little about me</div>
+          <h2>Learning today.<br>Building for tomorrow.</h2>
+          <p>I’m developing the knowledge and practical skills to turn ideas into thoughtful business solutions.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-highlight reveal">
+            <div class="section-kicker">My approach</div>
+            <div class="big-number">01</div>
+            <h3>Stay curious. Keep improving.</h3>
+            <p>I believe good business starts with understanding people, solving real problems, and being willing to learn.</p>
+          </div>
+          <div class="panel reveal">
+            <h3>Who I am</h3>
+            <p class="muted">I’m Tanishka Rathore, a BBA student interested in how organizations work and how strong communication, planning, and creative thinking contribute to success.</p>
+            <p class="muted">Through coursework and practice projects, I’m exploring business strategy, marketing, presentations, and digital productivity tools. I’m looking forward to gaining real-world experience and learning from new challenges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">What I'm developing</div>
+          <h2>Skills & strengths</h2>
+          <p>A growing mix of business knowledge, people skills, and digital capabilities.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">📈</div><h3>Business Fundamentals</h3><p>Learning management, organizational behavior, and basic business planning.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">💡</div><h3>Problem Solving</h3><p>Breaking down tasks, considering options, and working toward practical solutions.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">🗣️</div><h3>Communication</h3><p>Practicing clear written communication, presentations, and active listening.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">🤝</div><h3>Teamwork</h3><p>Collaborating respectfully, sharing responsibilities, and learning from others.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">🎯</div><h3>Planning & Organization</h3><p>Setting priorities, organizing information, and managing academic tasks.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">💻</div><h3>Digital Tools</h3><p>Building familiarity with office tools and basic website concepts.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">Practice in action</div>
+          <h2>Projects & coursework</h2>
+          <p>Sample portfolio entries you can replace with your actual college assignments, presentations, and projects.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">🔎</div><span class="project-type">Research</span></div>
+            <h3>Market Research Study</h3>
+            <p>A practice study exploring customer needs, competitor positioning, and how businesses can understand their target audience.</p>
+            <div class="tag-list"><span class="tag">Marketing</span><span class="tag">Research</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">📣</div><span class="project-type">Strategy</span></div>
+            <h3>Brand Promotion Plan</h3>
+            <p>A sample campaign plan outlining a target audience, promotional channels, content ideas, and success measures.</p>
+            <div class="tag-list"><span class="tag">Branding</span><span class="tag">Planning</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">🖥️</div><span class="project-type">Digital</span></div>
+            <h3>Personal Portfolio Website</h3>
+            <p>This website presents my interests, developing skills, education, and selected academic work in one place.</p>
+            <div class="tag-list"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">My learning journey</div>
+          <h2>Education</h2>
+          <p>My academic foundation and the skills I’m working to strengthen.</p>
+        </div>
+        <div class="education-grid">
+          <article class="timeline-card reveal">
+            <div class="timeline-dot"></div>
+            <div><div class="meta">CURRENT STUDIES</div><h3>Bachelor of Business Administration (BBA)</h3><p class="muted">Studying business and management fundamentals, with an interest in marketing, organizational behavior, and entrepreneurship.</p></div>
+          </article>
+          <article class="timeline-card reveal">
+            <div class="timeline-dot"></div>
+            <div><div class="meta">CONTINUOUS LEARNING</div><h3>Digital & Professional Skills</h3><p class="muted">Practicing presentations, digital productivity, communication, and beginner web design alongside academic studies.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">Let's connect</div>
+          <h2>Have an opportunity or idea?</h2>
+          <p>I’d be happy to connect about learning opportunities, collaborations, or business projects.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Contact details</h3>
+            <p class="muted">Replace the placeholders below with your real contact information before publishing.</p>
+            <div class="contact-detail"><div class="mini-icon">✉</div><div><small>Email</small><strong>your.email@example.com</strong></div></div>
+            <div class="contact-detail"><div class="mini-icon">in</div><div><small>LinkedIn</small><strong>Add your LinkedIn profile</strong></div></div>
+            <div class="contact-detail"><div class="mini-icon">⌖</div><div><small>Location</small><strong>India</strong></div></div>
+          </div>
+          <div class="contact-card reveal">
+            <h3>Send a message</h3>
+            <p class="muted" style="margin-bottom:18px">This demo form opens your email app; it does not store or send messages on its own.</p>
+            <form id="contactForm">
+              <div><label for="name">Your name</label><input id="name" name="name" autocomplete="name" placeholder="Enter your name" required></div>
+              <div><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+              <div><label for="message">Message</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
+              <button class="btn btn-primary" type="submit">Prepare Email <span aria-hidden="true">↗</span></button>
+              <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© <span id="year"></span> Tanishka Rathore. Made with curiosity.</p>
+      <a class="back-top" href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // Reveal sections as they enter the viewport
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('visible'));
+    }
+
+    // Highlight the navigation link for the current section
+    const sections = document.querySelectorAll('main section[id]');
+    const navAnchors = navLinks.querySelectorAll('a');
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navAnchors.forEach(anchor => {
+              anchor.classList.toggle('active', anchor.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      sections.forEach(section => sectionObserver.observe(section));
+    }
+
+    // Contact form: prepare an email draft using the visitor's default email application.
+    // Replace the address below with Tanishka's real email before publishing.
+    const portfolioEmail = 'your.email@example.com';
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!name || !email || !message) {
+        formMessage.textContent = 'Please complete all fields.';
+        return;
+      }
+      if (portfolioEmail === 'your.email@example.com') {
+        formMessage.textContent = 'Please update portfolioEmail in the JavaScript with your real email address first.';
+        return;
+      }
+      const subject = encodeURIComponent('Portfolio enquiry from ' + name);
+      const body = encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message);
+      formMessage.textContent = 'Opening your email application...';
+      window.location.href = `mailto:${portfolioEmail}?subject=${subject}&body=${body}`;
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
